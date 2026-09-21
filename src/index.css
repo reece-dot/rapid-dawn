@@ -1,0 +1,410 @@
+@import 'tailwindcss';
+
+/* ------------------------------------------------------------------
+   Brand tokens. Every colour, font and easing curve is declared once
+   here; @theme also exposes them to Tailwind as utilities
+   (bg-void, text-cyan, font-display, …).
+
+   Rapid Dawn is a dark-only brand: near-black grounds, off-white text,
+   and a single cyan-to-green gradient lifted from the "RD" logo mark.
+------------------------------------------------------------------- */
+@theme {
+  /* Grounds — never pure black, so the gradient has somewhere to sit */
+  --color-void: #0a0a0c;
+  --color-void-2: #0f1012;
+  --color-panel: #141518;
+  --color-panel-2: #1a1c20;
+  --color-line: #26282e;
+  --color-line-soft: #1e2025;
+
+  /* Text */
+  --color-chalk: #f5f5f7;
+  --color-chalk-soft: #b9bcc4;
+  --color-chalk-mute: #82868f;
+
+  /* Accent — cyan → green, the RD mark */
+  --color-cyan: #1fd9e8;
+  --color-teal: #2adcc2;
+  --color-green: #4ce38c;
+  --color-cyan-deep: #0e9aa6;
+  --color-green-deep: #2a9c60;
+
+  /* Sensor-channel colours, used by the layer stack and sensor cards */
+  --color-band-rgb: #7dd3fc;
+  --color-band-nir: #f04e78;
+  --color-band-thermal: #ff9b3d;
+  --color-band-lidar: #a78bfa;
+
+  /* Type */
+  --font-display: 'Sora', 'Sora Fallback', ui-sans-serif, system-ui, sans-serif;
+  --font-sans: 'Inter', 'Inter Fallback', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* Motion */
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+:root {
+  --rd-cyan: #1fd9e8;
+  --rd-green: #4ce38c;
+  --rd-gradient: linear-gradient(115deg, #1fd9e8 0%, #2adcc2 46%, #4ce38c 100%);
+  --nav-h: 4.5rem;
+}
+
+@layer base {
+  * {
+    border-color: var(--color-line);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+    scroll-padding-top: calc(var(--nav-h) + 1rem);
+    background-color: var(--color-void);
+  }
+
+  body {
+    background-color: var(--color-void);
+    color: var(--color-chalk);
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+
+  /* Headlines: large, tight, weight 600 throughout. */
+  h1,
+  h2,
+  h3,
+  h4,
+  .font-display {
+    font-family: var(--font-display);
+    font-weight: 600;
+    line-height: 1.04;
+    letter-spacing: -0.03em;
+    text-wrap: balance;
+  }
+
+  h1 {
+    letter-spacing: -0.035em;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--rd-cyan);
+    outline-offset: 3px;
+    border-radius: 3px;
+  }
+
+  ::selection {
+    background: var(--rd-cyan);
+    color: #06181b;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+@layer components {
+  /* ---------- Layout ---------- */
+  .shell {
+    width: 100%;
+    max-width: 80rem;
+    margin-inline: auto;
+    padding-inline: 1.25rem;
+  }
+  @media (min-width: 768px) {
+    .shell {
+      padding-inline: 2rem;
+    }
+  }
+
+  .section {
+    padding-block: 5rem;
+  }
+  @media (min-width: 768px) {
+    .section {
+      padding-block: 7.5rem;
+    }
+  }
+
+  /* ---------- Type scale (fluid) ---------- */
+  .display-hero {
+    font-size: clamp(46px, 8.2vw, 108px);
+    letter-spacing: -0.035em;
+    line-height: 0.98;
+  }
+
+  .display-section {
+    font-size: clamp(34px, 5vw, 64px);
+    letter-spacing: -0.032em;
+    line-height: 1.04;
+  }
+
+  .display-sub {
+    font-size: clamp(24px, 3vw, 38px);
+    letter-spacing: -0.03em;
+    line-height: 1.12;
+  }
+
+  .lede {
+    font-size: clamp(17px, 1.5vw, 20px);
+    line-height: 1.62;
+    color: var(--color-chalk-soft);
+  }
+
+  /* ---------- Accent text ---------- */
+  .grad-text {
+    background: var(--rd-gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-chalk-mute);
+  }
+  /* The small gradient tick that precedes an eyebrow label */
+  .eyebrow::before {
+    content: '';
+    width: 1.5rem;
+    height: 2px;
+    border-radius: 2px;
+    background: var(--rd-gradient);
+  }
+
+  /* ---------- Buttons ---------- */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.55rem;
+    padding: 0.92rem 1.6rem;
+    border-radius: 999px;
+    font-family: var(--font-sans);
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    white-space: nowrap;
+    cursor: pointer;
+    transition:
+      transform 0.3s var(--ease-out-soft),
+      box-shadow 0.3s var(--ease-out-soft),
+      background-color 0.25s ease,
+      border-color 0.25s ease,
+      color 0.25s ease;
+  }
+
+  .btn-primary {
+    background: var(--rd-gradient);
+    color: #04191c;
+    box-shadow: 0 14px 34px -14px rgb(31 217 232 / 0.55);
+  }
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 20px 44px -14px rgb(31 217 232 / 0.7);
+  }
+
+  .btn-ghost {
+    background: rgb(255 255 255 / 0.04);
+    color: var(--color-chalk);
+    border: 1px solid rgb(255 255 255 / 0.16);
+    backdrop-filter: blur(8px);
+  }
+  .btn-ghost:hover {
+    transform: translateY(-2px);
+    border-color: rgb(31 217 232 / 0.55);
+    background: rgb(255 255 255 / 0.08);
+  }
+
+  /* ---------- Surfaces ---------- */
+  .panel {
+    position: relative;
+    background: linear-gradient(180deg, var(--color-panel) 0%, var(--color-void-2) 100%);
+    border: 1px solid var(--color-line);
+    border-radius: 1rem;
+    overflow: hidden;
+  }
+
+  /* Card with a gradient hairline that wipes in along the top edge */
+  .card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(180deg, var(--color-panel) 0%, var(--color-void-2) 100%);
+    border: 1px solid var(--color-line);
+    border-radius: 1rem;
+    overflow: hidden;
+    transition:
+      transform 0.45s var(--ease-out-soft),
+      border-color 0.35s ease,
+      box-shadow 0.45s var(--ease-out-soft);
+  }
+  .card:hover {
+    transform: translateY(-5px);
+    border-color: rgb(42 220 194 / 0.34);
+    box-shadow: 0 26px 56px -28px rgb(0 0 0 / 0.9);
+  }
+  .card::after {
+    content: '';
+    position: absolute;
+    inset-inline: 0;
+    top: 0;
+    height: 1.5px;
+    background: var(--rd-gradient);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.5s var(--ease-out-soft);
+  }
+  .card:hover::after {
+    transform: scaleX(1);
+  }
+
+  /* ---------- Forms ---------- */
+  .field-label {
+    display: block;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-chalk-mute);
+    margin-bottom: 0.45rem;
+  }
+
+  .field {
+    width: 100%;
+    padding: 0.85rem 1rem;
+    font-size: 1rem;
+    font-family: var(--font-sans);
+    color: var(--color-chalk);
+    background: rgb(255 255 255 / 0.03);
+    border: 1px solid var(--color-line);
+    border-radius: 0.6rem;
+    transition:
+      border-color 0.2s ease,
+      box-shadow 0.2s ease,
+      background-color 0.2s ease;
+  }
+  .field::placeholder {
+    color: #5d616b;
+  }
+  .field:hover {
+    border-color: #343740;
+  }
+  .field:focus {
+    outline: none;
+    border-color: var(--rd-cyan);
+    background: rgb(255 255 255 / 0.05);
+    box-shadow: 0 0 0 3px rgb(31 217 232 / 0.14);
+  }
+  .field[aria-invalid='true'] {
+    border-color: #f0556e;
+  }
+  .field[aria-invalid='true']:focus {
+    box-shadow: 0 0 0 3px rgb(240 85 110 / 0.16);
+  }
+
+  /* Native select chevrons do not follow a dark theme; supply our own. */
+  select.field {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%2382868f' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.85rem center;
+    padding-right: 2.75rem;
+  }
+  /* The menu itself is drawn by the OS — force legible colours inside it. */
+  select.field option {
+    background-color: var(--color-panel);
+    color: var(--color-chalk);
+  }
+
+  .field-error {
+    display: block;
+    margin-top: 0.4rem;
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: #f0768a;
+  }
+
+  /* ---------- Misc ---------- */
+  .skip-link {
+    position: absolute;
+    left: 1rem;
+    top: -6rem;
+    z-index: 100;
+    padding: 0.75rem 1.25rem;
+    background: var(--rd-cyan);
+    color: #04191c;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    transition: top 0.2s ease;
+  }
+  .skip-link:focus {
+    top: 1rem;
+  }
+
+  /* Hairline divider that fades out at both ends */
+  .rule-fade {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--color-line) 18%, var(--color-line) 82%, transparent);
+  }
+}
+
+@layer utilities {
+  /* Faint survey-grid backdrop used behind dark sections */
+  .grid-bg {
+    background-image:
+      linear-gradient(rgb(255 255 255 / 0.028) 1px, transparent 1px),
+      linear-gradient(90deg, rgb(255 255 255 / 0.028) 1px, transparent 1px);
+    background-size: 64px 64px;
+  }
+
+  /* Radial cyan bloom, for hero and CTA grounds */
+  .bloom {
+    background: radial-gradient(60% 60% at 50% 0%, rgb(31 217 232 / 0.14) 0%, transparent 70%);
+  }
+
+  .grad-border {
+    border: 1px solid transparent;
+    background:
+      linear-gradient(var(--color-panel), var(--color-panel)) padding-box,
+      var(--rd-gradient) border-box;
+  }
+
+  .tabular {
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+/* ------------------------------------------------------------------
+   Reduced motion. Framer Motion is told separately via useReducedMotion;
+   this covers every CSS transition and animation on the page.
+------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

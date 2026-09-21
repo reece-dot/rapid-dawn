@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en-ZA">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#0a0a0c" />
+    <meta name="color-scheme" content="dark" />
+
+    <!--
+      Static SEO defaults. These are what a crawler or social scraper sees
+      before any JavaScript runs. Once React mounts, <Seo /> renders the
+      route-accurate versions and main.jsx removes everything marked
+      data-static-seo, so the document never ends up with two titles,
+      two descriptions or two canonicals.
+    -->
+    <title data-static-seo>Rapid Dawn | Drone &amp; Aerial Survey, Mapping &amp; Analysis</title>
+    <meta
+      data-static-seo
+      name="description"
+      content="We fly your ground. You get maps you can act on. Terrain modelling, volumetrics, crop health indices, topographic survey, photogrammetry and radiometric thermal survey. Turnaround usually under a week."
+    />
+    <link data-static-seo rel="canonical" href="https://rapiddawn.co.za/" />
+
+    <!-- Open Graph / social -->
+    <meta data-static-seo property="og:type" content="website" />
+    <meta data-static-seo property="og:site_name" content="Rapid Dawn" />
+    <meta data-static-seo property="og:locale" content="en_ZA" />
+    <meta
+      data-static-seo
+      property="og:title"
+      content="Rapid Dawn | Drone &amp; Aerial Survey, Mapping &amp; Analysis"
+    />
+    <meta
+      data-static-seo
+      property="og:description"
+      content="We fly your ground. You get maps you can act on. Terrain, vegetation, elevation and heat — captured from the air, returned as measurements."
+    />
+    <meta data-static-seo property="og:url" content="https://rapiddawn.co.za/" />
+    <meta
+      data-static-seo
+      property="og:image"
+      content="https://images.unsplash.com/photo-1497436072909-60f360e1d4b1?auto=format&fit=crop&fm=jpg&w=1200&h=630&q=76"
+    />
+    <meta data-static-seo property="og:image:width" content="1200" />
+    <meta data-static-seo property="og:image:height" content="630" />
+    <meta
+      data-static-seo
+      property="og:image:alt"
+      content="Dense green forest meeting turquoise water, photographed straight down from a drone"
+    />
+    <meta data-static-seo name="twitter:card" content="summary_large_image" />
+
+    <!-- Fonts: Sora (display) + Inter (body) + IBM Plex Mono (labels) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://images.unsplash.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap"
+    />
+
+    <!-- Hero image: fetched early so LCP does not wait on the JS bundle -->
+    <link
+      rel="preload"
+      as="image"
+      fetchpriority="high"
+      href="https://images.unsplash.com/photo-1497436072909-60f360e1d4b1?auto=format&fit=crop&fm=webp&w=1900&h=1069&q=72"
+      imagesrcset="
+        https://images.unsplash.com/photo-1497436072909-60f360e1d4b1?auto=format&fit=crop&fm=webp&w=900&h=506&q=72 900w,
+        https://images.unsplash.com/photo-1497436072909-60f360e1d4b1?auto=format&fit=crop&fm=webp&w=1400&h=788&q=72 1400w,
+        https://images.unsplash.com/photo-1497436072909-60f360e1d4b1?auto=format&fit=crop&fm=webp&w=1900&h=1069&q=72 1900w,
+        https://images.unsplash.com/photo-1497436072909-60f360e1d4b1?auto=format&fit=crop&fm=webp&w=2400&h=1350&q=72 2400w"
+      imagesizes="100vw"
+    />
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/favicon.svg" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <!--
+      ProfessionalService schema lives in the static HTML so crawlers pick it up
+      without executing JS. Per-page schema (ItemList / CollectionPage /
+      ContactPage) is rendered by <Seo /> inside each route.
+    -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "ProfessionalService",
+        "@id": "https://rapiddawn.co.za/#business",
+        "name": "Rapid Dawn",
+        "alternateName": "Rapid Dawn Aerial Survey",
+        "description": "Drone and aerial survey company providing terrain modelling and volumetrics, crop and canopy health indices, topographic drone survey, photogrammetric models, radiometric temperature survey, satellite context layers and data processing.",
+        "slogan": "We fly your ground. You get maps you can act on.",
+        "url": "https://rapiddawn.co.za/",
+        "email": "hello@rapiddawn.co.za",
+        "telephone": "+270000000000",
+        "priceRange": "$$",
+        "image": "https://images.unsplash.com/photo-1497436072909-60f360e1d4b1?auto=format&fit=crop&fm=jpg&w=1200&h=630&q=76",
+        "address": {
+          "@type": "PostalAddress",
+          "addressCountry": "ZA"
+        },
+        "areaServed": { "@type": "Country", "name": "South Africa" },
+        "knowsAbout": [
+          "Photogrammetry",
+          "LiDAR",
+          "NDVI",
+          "Multispectral imaging",
+          "Radiometric thermography",
+          "Sentinel-2 satellite imagery",
+          "Geographic information systems"
+        ],
+        "employee": {
+          "@type": "Person",
+          "name": "Robin Butler",
+          "jobTitle": "Pilot & analyst",
+          "hasCredential": [
+            "Private pilot license",
+            "Registered RPAS instructor",
+            "GIS technician diploma"
+          ]
+        },
+        "hasOfferCatalog": {
+          "@type": "OfferCatalog",
+          "name": "Aerial survey services",
+          "itemListElement": [
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Terrain modelling & volumetrics" } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Crop & canopy health indices" } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Topographic drone survey" } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Photogrammetric models" } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Radiometric temperature survey" } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Satellite context layer (Sentinel-2)" } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Data processing & analysis" } }
+          ]
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <noscript>
+      <div style="padding: 2rem; font-family: system-ui, sans-serif; color: #f5f5f7; background: #0a0a0c">
+        <h1>Rapid Dawn</h1>
+        <p>
+          We fly your ground. You get maps you can act on. Drone and aerial survey — terrain
+          modelling, volumetrics, crop health, topographic survey, photogrammetry and radiometric
+          thermal.
+        </p>
+        <p>
+          Please enable JavaScript, or email us at
+          <a style="color: #1fd9e8" href="mailto:hello@rapiddawn.co.za">hello@rapiddawn.co.za</a>.
+        </p>
+      </div>
+    </noscript>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
