@@ -148,6 +148,17 @@ of security headers including a CSP.
 The CSP allows `images.unsplash.com` (imagery) and Google Fonts. If you self-host the fonts or
 migrate imagery to your own bucket, tighten it accordingly.
 
+### Do not add `cleanUrls` to `vercel.json`
+
+It was set once and broke every deep link: `/services`, `/work` and `/contact` returned 404 on
+direct navigation, while the homepage loaded normally. `cleanUrls` strips `.html` from URLs for
+multi-page static sites and makes Vercel redirect `/index.html` to `/` — which collides with the
+SPA rewrite that has to resolve *to* `/index.html`. This site has one HTML file and routes on the
+client, so the setting offers nothing and only creates the conflict.
+
+Deep links are the thing to check after any routing change: loading `/services` directly (not by
+clicking through from the homepage) is what exercises the rewrite.
+
 ---
 
 ## Known environment issue: the `rollup` override
