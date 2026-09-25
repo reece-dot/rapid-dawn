@@ -9,6 +9,7 @@ import Home from './pages/Home'
 // Home ships in the main bundle (it is the LCP route); the rest split out.
 const Services = lazy(() => import('./pages/Services'))
 const Work = lazy(() => import('./pages/Work'))
+const Gallery = lazy(() => import('./pages/Gallery'))
 const Contact = lazy(() => import('./pages/Contact'))
 const NotFound = lazy(() => import('./pages/NotFound'))
 
@@ -41,6 +42,7 @@ export default function App() {
               <Route path="/" element={<Home />} />
               <Route path="/services" element={<Services />} />
               <Route path="/work" element={<Work />} />
+              <Route path="/gallery" element={<Gallery />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="*" element={<NotFound />} />
             </Routes>

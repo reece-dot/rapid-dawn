@@ -10,7 +10,7 @@ import { mkdirSync } from 'node:fs'
 
 const BASE = process.env.BASE ?? 'http://localhost:4173'
 const OUT = process.env.OUT ?? 'screenshots'
-const ROUTES = ['/', '/services', '/work', '/contact', '/no-such-page']
+const ROUTES = ['/', '/services', '/work', '/gallery', '/contact', '/no-such-page']
 
 mkdirSync(OUT, { recursive: true })
 

@@ -28,6 +28,33 @@ export function widthSet(id, widths, ratio, q = 72) {
   return widths.map((w) => `${img(id, w, Math.round(w / ratio), q)} ${w}w`).join(', ')
 }
 
+/* ------------------------------------------------------------------
+   Cloudinary — client-supplied survey imagery for the gallery.
+
+   Unsplash takes its transforms as a query string; Cloudinary takes them
+   as a path segment, so these cannot go through img() above. Every source
+   is 3840×2160, so a derivative is mandatory rather than an optimisation —
+   the originals run to 2MB apiece.
+------------------------------------------------------------------- */
+
+const CLOUDINARY = 'https://res.cloudinary.com/i0es4bhq/image/upload'
+
+/**
+ * `f_auto` negotiates AVIF/WebP per browser, `q_auto` picks quality per image.
+ *
+ * @param {string} id      Cloudinary public id, e.g. "1000183701"
+ * @param {number} version Asset version, e.g. 1790320747
+ * @param {number} w       Target width in px
+ */
+export function cloud(id, version, w) {
+  return `${CLOUDINARY}/f_auto,q_auto,w_${w}/v${version}/${id}.jpg`
+}
+
+/** Width-based srcset — the gallery grid and lightbox are both fluid. */
+export function cloudSet(id, version, widths) {
+  return widths.map((w) => `${cloud(id, version, w)} ${w}w`).join(', ')
+}
+
 /** The hero is preloaded in index.html; keep both definitions in step. */
 export const HERO = {
   id: 'photo-1497436072909-60f360e1d4b1',

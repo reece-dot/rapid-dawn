@@ -31,7 +31,101 @@ export const NAV_LINKS = [
   { to: '/', label: 'Home' },
   { to: '/services', label: 'Services' },
   { to: '/work', label: 'Work' },
+  { to: '/gallery', label: 'Gallery' },
   { to: '/contact', label: 'Contact' },
+]
+
+/* ------------------------------------------------------------------ */
+/* Gallery — real client survey outputs, hosted on Cloudinary.
+/*
+/* Unlike the samples on /work, which are stock photography run through a
+/* gradient map to demonstrate symbology, every frame here is genuine
+/* deliverable output. See lib/images.js for the URL helpers.
+/*
+/* All eight sources are 3840×2160; the shared ratio is GALLERY_RATIO below
+/* rather than repeated per item. `caption` explains why the image matters,
+/* `alt` describes what is visible — they are not interchangeable.
+/*
+/* NOTE: every source image carries its own burnt-in label (bottom-left).
+/* Each caption below was matched against that label, so the wording here
+/* agrees with what is actually rendered in the frame. If a caption is
+/* reworded later, check it still matches the label in the image.
+/* ------------------------------------------------------------------ */
+export const GALLERY_RATIO = { width: 3840, height: 2160 }
+
+export const GALLERY = [
+  {
+    // Labelled "THERMAL · CITRUS · WINTER MORNING"
+    id: '1000183707',
+    version: 1790320740,
+    tag: 'Thermal · Crop & Canopy Health',
+    caption:
+      "Thermal imagery of a citrus block at winter sunrise — temperature mapped tree by tree to identify stress before it's visible to the eye.",
+    alt: 'Thermal map of a citrus orchard at winter sunrise, tree canopies rendered in cool purple against warm orange ground between the rows',
+  },
+  {
+    // Labelled "MACADAMIA BLOCK · NDVI · ~5,800 TREES"
+    id: '1000183709',
+    version: 1790320156,
+    tag: 'NDVI · Crop & Canopy Health',
+    caption:
+      'Vegetation index map of a macadamia block (~5,800 trees) — canopy health scored and colour-coded across the entire block in a single flight.',
+    alt: 'NDVI map of a macadamia block isolated on black, dense green tree rows broken by orange and red bands where canopy vigour drops away',
+  },
+  {
+    // Labelled "LIDAR · OPENCAST MINE · BARE EARTH + DRAINAGE"
+    id: '1000183705',
+    version: 1790320745,
+    tag: 'LiDAR · Terrain Modelling & Volumetrics',
+    caption:
+      'Bare-earth LiDAR of an opencast mine site showing drainage channels — used for water flow modelling and erosion risk assessment.',
+    alt: 'Bare-earth LiDAR of an opencast mine, a fine green dendritic network of drainage channels branching across stripped terrain',
+  },
+  {
+    // Labelled "LIDAR · OPENCAST MINE · 0.5 M CONTOURS"
+    id: '1000183703',
+    version: 1790320739,
+    tag: 'LiDAR · Topographic Survey',
+    caption:
+      '0.5m contour lines derived from LiDAR of an opencast mine — precision elevation data for engineering and planning.',
+    alt: 'Contour plan of an opencast mine on black, half-metre contour lines in green and cyan tracing a long ridge and the pit edge below it',
+  },
+  {
+    // Labelled "LIDAR · PINE PLANTATION · CANOPY HEIGHT, 15 CM"
+    id: '1000183699',
+    version: 1790320741,
+    tag: 'LiDAR · Crop & Canopy Health',
+    caption:
+      'Canopy height model of a pine plantation — individual tree heights measured to 15cm accuracy across the full stand.',
+    alt: 'Canopy height model of a pine plantation, thousands of individual tree crowns picked out in green with darker firebreak tracks cutting through the stand',
+  },
+  {
+    // Labelled "LIDAR · TIMBER-BOARD PLANT · 67.9 MILLION POINTS"
+    id: '1000183701',
+    version: 1790320747,
+    tag: 'LiDAR · Photogrammetric Models',
+    caption:
+      '67.9 million point LiDAR scan of a timber-board plant — full structural capture for asset management and facility planning.',
+    alt: 'Green LiDAR point cloud of a timber-board plant seen obliquely, long factory roofs, stacks, gantries and surrounding trees resolved in three dimensions',
+  },
+  {
+    // Labelled "01 RGB / 02 COLOUR INFRARED / 03 NDRE / 04 NDVI / 05 TREE HEIGHT"
+    id: '1000183695',
+    version: 1790320742,
+    tag: 'Multispectral · Crop & Canopy Health',
+    caption:
+      'Five-band capture of the same orchard block: RGB, colour infrared, NDRE, NDVI, and tree height — one flight, five data layers.',
+    alt: 'Five vertical panels of the same orchard rows: natural colour, crimson colour-infrared, blue NDRE, green and orange NDVI, and a pale tree-height rendering',
+  },
+  {
+    // Labelled "WHAT THE EYE SEES" / "NDVI · WHAT THE DRONE SEES"
+    id: '1000183697',
+    version: 1790320743,
+    tag: 'NDVI · Crop & Canopy Health',
+    caption:
+      'The same orchard, twice: natural colour on the left, NDVI on the right. Rows that read as uniformly green to the eye separate into clear bands of stress once the index is applied.',
+    alt: 'Split view of one orchard divided diagonally, the left half a natural-colour photograph of green tree rows, the right half the same rows as an NDVI map streaked with orange and red stress',
+  },
 ]
 
 /* ------------------------------------------------------------------ */
