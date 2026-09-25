@@ -51,7 +51,6 @@
      --color-teal (#2adcc2): defined once here so the two can be reconciled
      with a single edit if the brand palette ever absorbs it. */
   --rd-gallery: #00c896;
-  --rd-gallery-ground: #0d0d0d;
   --rd-gradient: linear-gradient(115deg, #1fd9e8 0%, #2adcc2 46%, #4ce38c 100%);
   --nav-h: 4.5rem;
 }
